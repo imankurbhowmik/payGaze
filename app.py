@@ -135,16 +135,23 @@ elif page == "📈 State Comparison":
         # Download Option (PNG)
         st.markdown("### 📥 Download Chart as Image")
 
-        selected_download_fig = st.radio("Which graph to download?", ["Amount Trend", "Count Trend"])
-        if selected_download_fig == "Amount Trend":
-            fig_to_export = fig_multi
-        else:
-            fig_to_export = fig_count
+selected_download_fig = st.radio("Which graph to download?", ["Amount Trend", "Count Trend"])
+if selected_download_fig == "Amount Trend":
+    fig_to_export = fig_multi
+else:
+    fig_to_export = fig_count
 
-        from plotly.io import to_image
-        import base64
+import plotly.io as pio
+import io
 
-        img_bytes = to_image(fig_to_export, format="png")
-        b64 = base64.b64encode(img_bytes).decode()
-        href = f'<a href="data:image/png;base64,{b64}" download="{selected_download_fig.replace(" ", "_")}.png">📷 Download PNG</a>'
-        st.markdown(href, unsafe_allow_html=True)
+try:
+    img_bytes = pio.to_image(fig_to_export, format="png", engine="kaleido")
+    st.download_button(
+        label="📷 Download PNG",
+        data=img_bytes,
+        file_name=f"{selected_download_fig.replace(' ', '_')}.png",
+        mime="image/png"
+    )
+except Exception as e:
+    st.error("❌ Image export failed. You can still right-click the chart above and choose 'Save as image'.")
+    st.exception(e)

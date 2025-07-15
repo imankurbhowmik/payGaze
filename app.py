@@ -132,26 +132,4 @@ elif page == "📈 State Comparison":
         fig_count.update_layout(xaxis_title="Period", yaxis_title="Number of Transactions")
         st.plotly_chart(fig_count, use_container_width=True)
 
-        # Download Option (PNG)
-        st.markdown("### 📥 Download Chart as Image")
-
-    selected_download_fig = st.radio("Which graph to download?", ["Amount Trend", "Count Trend"])
-    if selected_download_fig == "Amount Trend":
-        fig_to_export = fig_multi
-    else:
-        fig_to_export = fig_count
-
-    import plotly.io as pio
-    import io
-
-    try:
-        img_bytes = pio.to_image(fig_to_export, format="png", engine="kaleido")
-        st.download_button(
-            label="📷 Download PNG",
-            data=img_bytes,
-            file_name=f"{selected_download_fig.replace(' ', '_')}.png",
-            mime="image/png"
-        )
-    except Exception as e:
-        st.error("❌ Image export failed. You can still right-click the chart above and choose 'Save as image'.")
-        st.exception(e)
+        

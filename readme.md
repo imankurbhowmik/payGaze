@@ -47,3 +47,16 @@ _Deployed on Streamlit Cloud_
 git clone https://github.com/imankurbhowmik/payGaze.git
 cd payGaze
 pip install -r requirements.txt
+```
+
+## Deployment
+
+- Live at : https://paygaze-io.streamlit.app
+
+---
+
+## Author
+
+**Ankur Bhowmik**
+**[LinkedIn](https://www.linkedin.com/in/ankur-bhowmik-83921b18b)**
+
